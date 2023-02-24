@@ -1,0 +1,20 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = pd.read_csv('newyork.csv', parse_dates=['date'])
+
+plt.scatter(data['date'],data['temperature']<<90 , label='Temperature')
+
+z = np.polyfit(data['date'].astype('int64') // 10 ** 9, data['temperature'], 1)
+p = np.poly1d(z)
+
+plt.plot(data['date'], p(data['date'].astype('int64') // 10 ** 9), 'r-', label='Best fit line')
+
+plt.title('Temperature vs Date')
+plt.xlabel('Date')
+plt.ylabel('Temperature')
+
+plt.legend()
+
+plt.show()
